@@ -3,8 +3,27 @@
 	"version": "0.0.2",
 	"description": "Telegram Web App js wrapper",
 	"type": "module",
+	"license": "MIT",
+	"author": "whoisYeshua + MarkSinD",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/atomazing/telegram-web-app.git"
+	},
+	"bugs": {
+		"url": "https://github.com/atomazing/telegram-web-app.git"
+	},
+	"homepage": "https://github.com/atomazing/telegram-web-app.git",
+	"keywords": [
+		"telegram",
+		"atomazing"
+	],
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
 	"files": [
-		"dist"
+		"dist",
+		"README.md"
 	],
 	"exports": {
 		"types": "./dist/index.d.ts",
