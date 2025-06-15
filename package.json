@@ -1,26 +1,10 @@
 {
 	"name": "@atomazing-org/telegram-web-app",
-	"version": "0.0.4",
+	"version": "0.0.7",
 	"description": "Telegram Web App js wrapper",
 	"type": "module",
 	"license": "MIT",
 	"author": "whoisYeshua + MarkSinD",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/atomazing/telegram-web-app.git"
-	},
-	"bugs": {
-		"url": "https://github.com/atomazing/telegram-web-app.git"
-	},
-	"homepage": "https://github.com/atomazing/telegram-web-app.git",
-	"keywords": [
-		"telegram",
-		"atomazing"
-	],
-	"publishConfig": {
-		"access": "public",
-		"registry": "https://registry.npmjs.org/"
-	},
 	"files": [
 		"dist",
 		"README.md"
@@ -33,26 +17,48 @@
 	"scripts": {
 		"start": "node --experimental-strip-types src/index.ts",
 		"build": "tsup",
+		"deploy": "npm run build && npm publish",
 		"format": "npm run format:prettier",
 		"format:prettier": "npm run lint:prettier -- --write",
 		"lint": "npm run lint:prettier && npm run lint:ts",
-		"lint:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --check --ignore-path ../../.prettierignore",
+		"lint:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --check",
 		"lint:ts": "tsc --noEmit",
 		"clean": "rimraf dist node_modules",
-		"debug:prettier": "prettier \"./src/index.ts\" --loglevel debug --ignore-path ../../.prettierignore",
-		"debug:ts": "tsc --showConfig"
+		"debug:prettier": "prettier \"./src/index.ts\" --loglevel debug",
+		"debug:ts": "tsc --showConfig",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@types/telegram-web-app": "7.10.1"
 	},
 	"devDependencies": {
 		"@atomazing-org/tsconfig": "latest",
-		"tsup": "8.3.5",
-		"typescript": "^5.8.3"
+		"husky": "9.1.7",
+		"lint-staged": "16.1.2",
+		"prettier": "3.5.3",
+		"rimraf": "6.0.1",
+		"tsup": "8.5.0",
+		"typescript": "5.8.3"
 	},
 	"packageManager": "npm@10.9.0",
 	"engines": {
 		"node": ">=22.11",
 		"npm": ">=10"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/atomazing/telegram-web-app.git"
+	},
+	"bugs": {
+		"url": "https://github.com/atomazing/telegram-web-app"
+	},
+	"homepage": "https://github.com/atomazing/telegram-web-app",
+	"keywords": [
+		"telegram",
+		"atomazing"
+	],
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
 	}
 }

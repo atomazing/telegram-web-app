@@ -1,30 +1,20 @@
 const TELEGRAM_SCRIPT_SRC = 'https://telegram.org/js/telegram-web-app.js'
 
-let telegramInstance: typeof window.Telegram | undefined
+const loadTelegramWebAppScript = () => {
+	const { resolve, promise, reject } = Promise.withResolvers<globalThis.Telegram>()
 
-const loadTelegramWebAppScript = (): Promise<typeof window.Telegram> => {
-	return new Promise((resolve, reject) => {
-		if (telegramInstance) return resolve(telegramInstance)
-		if (typeof window.Telegram !== 'undefined') {
-			telegramInstance = window.Telegram
-			return resolve(telegramInstance)
-		}
+	if (window.Telegram) return resolve(window.Telegram)
 
-		const script = document.createElement('script')
-		script.src = TELEGRAM_SCRIPT_SRC
-		script.async = true
-		script.onload = () => {
-			telegramInstance = window.Telegram
-			resolve(telegramInstance)
-		}
-		script.onerror = () => {
-			reject(new Error('Failed to load Telegram Web App script'))
-		}
-		document.head.appendChild(script)
-	})
+	const script = document.createElement('script')
+	script.src = TELEGRAM_SCRIPT_SRC
+	script.async = true
+	script.addEventListener('load', () => resolve(window.Telegram))
+	script.addEventListener('error', () =>
+		reject(new Error('Failed to load Telegram Web App script')),
+	)
+	document.head.append(script)
+
+	return promise
 }
 
-export const loadTelegram = async (): Promise<typeof window.Telegram> => {
-	if (telegramInstance) return telegramInstance
-	return await loadTelegramWebAppScript()
-}
+export const Telegram = await loadTelegramWebAppScript()
